@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'LMS.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         # Replace this value with your local database's connection string.
-        default='postgresql://lms:mICoeUJZ4eCa6TvAoD2Mu8yHhzQoKL3o@dpg-cr2dum5svqrc73fkq5eg-a.oregon-postgres.render.com/lms_qkn5'
+        default='postgresql://lmsdb_o74h_user:E3GclaZsIPwVsFZRzSFlUDzBPcpqgJ6s@dpg-cr2fm3btq21c73f8afbg-a.singapore-postgres.render.com/lmsdb_o74h'
     )
 }
 
