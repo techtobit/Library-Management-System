@@ -1,7 +1,7 @@
 databases:
   - name: LMS
     plan: free
-    databaseName: LMS
+    databaseName: LMSdb
     user: LMS
 
 services:
