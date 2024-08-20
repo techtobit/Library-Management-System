@@ -49,7 +49,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'LMS.urls'
+ROOT_URLCONF = 'library_ms.urls'
 
 TEMPLATES = [
     {
@@ -67,7 +67,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'LMS.wsgi.application'
+WSGI_APPLICATION = 'library_ms.wsgi.application'
 
 
 # Database
@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'LMS.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         # Replace this value with your local database's connection string.
-        default='postgresql://lmsdb_o74h_user:E3GclaZsIPwVsFZRzSFlUDzBPcpqgJ6s@dpg-cr2fm3btq21c73f8afbg-a.singapore-postgres.render.com/lmsdb_o74h'
+        default='postgresql://lmsdb_92qa_user:E3m6GjZ3aV7LQmyZ030X01Rf7B94Xl8d@dpg-cr2frdrtq21c73f8cvqg-a.singapore-postgres.render.com/lmsdb_92qa'
     )
 }
 
