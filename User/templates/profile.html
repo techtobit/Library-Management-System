@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+<section style="background-color: #eee;">
+    <div class="container py-5">
+      <div class="row">
+        <div class="col">
+          <nav aria-label="breadcrumb" class="bg-body-tertiary rounded-3 p-3 mb-4">
+            <ol class="breadcrumb mb-0">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="#">User</a></li>
+              <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="card mb-4">
+            <div class="card-body text-center">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                class="rounded-circle img-fluid" style="width: 150px;">
+              <h5 class="my-3">Full Stack Developer</h5>
+              <div class="d-flex justify-content-center mb-2">
+                <form method="POST" class='d-flex flex-column'>
+                    {% csrf_token %}
+                    {{deposit_form|crispy}}
+                    <button type="submit" name='deposit_balance' data-mdb-button-init data-mdb-ripple-init class="btn btn-primary">Deposit</button>
+                </form>
+                
+                </div>
+            </div>
+        </div>
+
+        </div>
+        <div class="col-lg-8">
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Full Name</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ profile.user.first_name }} {{ profile.user.last_name }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">User Name</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">@{{ profile.user.username }} </p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Email</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ profile.user.email }} </p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Current Balance</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0"> ${{ profile.balance }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Joined Date</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0"> {{ profile.user.date_joined }}</p>
+                </div>
+              </div>
+              <hr>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Book</th>
+            <th scope="col">Price</th>
+            <th scope="col">Borrowed Date</th>
+            <th scope="col">Return</th>
+            <th scope="col">Review</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for borrowed_book in borrowed_books %}
+              <tr>
+                  <th scope="row">{{ borrowed_book.book.id }}</th>
+                  <td>
+                    <div class="d-flex align-items-center">
+                      <img
+                          src={{borrowed_book.book.image.url}}
+                          alt=""
+                          style="width: 45px; height: 45px"
+                          class="rounded-circle"
+                          />
+                      <div class="ms-3">
+                            <p class="fw-bold mb-1">{{ borrowed_book.book.title }}</p>
+                            <p class="text-muted mb-0">by {{ borrowed_book.book.author }}</p>
+                      </div>
+                          
+                    </div>
+                  </td>
+                  <td>{{ borrowed_book.book.price }}</td>
+                  <td>{{ borrowed_book.borrowed_on }}</td>
+                  <td>
+                      <form method="post">
+                          {% csrf_token %}
+                          <input type="hidden" name="book_id" value="{{ borrowed_book.id }}">
+                          <button type="submit" name='return_book' class="btn btn-primary">Get Pay</button>
+                      </form>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#reviewModal{{ borrowed_book.book.id }}">
+                      Give Rateing
+                  </button>
+      
+                  </td>
+              </tr>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="reviewModal{{ borrowed_book.book.id }}" tabindex="-1" aria-labelledby="reviewModalLabel{{ borrowed_book.book.id }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="reviewModalLabel{{ borrowed_book.book.id }}">Review {{ borrowed_book.book.title }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="book_id" value="{{ borrowed_book.book.id }}">
+                                {{ review_form.as_p }}
+                                <button type="submit" name="add_review" class="btn btn-primary">Submit Review</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+          {% empty %}
+              <tr>
+                  <td colspan="4">You have not borrowed any books yet.</td>
+              </tr>
+          {% endfor %}
+      </tbody>
+      </table>
+    </div>
+  </section>
+
+
+
+
+
+
+{% endblock %}

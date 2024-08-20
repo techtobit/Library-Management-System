@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container col-10 py-5 d-flex flex-column justify-content-center">
+
+
+
+<div class="card " style="max-width: 100%;">
+  <div class="row g-0 ">
+    <div class="col-md-4">
+      <img src="{{object.image.url}}" class="card-img-top" alt="...">
+    </div>
+    <div class="col-md-8 ">
+      <div class="card-body ">
+				<h1 class="card-title fw-bold text-uppercase gap-2">{{object.title}}</h1>
+				<div class="progress" style="height: 1px;"></div>
+				<div class='d-flex gap-4 pt-2 '>
+					<p class="card-text text-muted">Price : ${{object.price}}</p>
+					<p class="card-text text-muted">Author : {{object.author}}</p>
+					<p class="card-text text-muted">Category: {{ book.category.all|join:", " }}</p>
+					<p class="card-text text-muted">Rating: {{ average_rating }}</p>
+				</div>
+				<div class="progress" style="height: 1px;"></div>
+				<p class='pt-4'>{{object.description}}</p>
+      </div>
+			<div class="d-grid gap-2 ">
+				<form method="post">
+					{% csrf_token %}
+					{% if request.user.is_authenticated %}
+					<button class="btn btn-primary m-3 " type="submit">Borrow Book</button>
+					{%endif%}
+			</form>
+			</div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock content %}
