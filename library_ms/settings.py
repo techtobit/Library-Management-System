@@ -5,6 +5,11 @@ import os
 import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+from django.core.wsgi import get_wsgi_application
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'library_ms.settings')
+application = get_wsgi_application()
+
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -13,7 +18,7 @@ SECRET_KEY = 'django-insecure-zb^wzdghe6wq4z06@v82v97e*o$io-d&ji!e300t9n5s01zm$2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["*", "library-ms-p5si.onrender.com"]
 
 
 # Application definition
@@ -130,7 +135,7 @@ USE_TZ = True
 
 
 MEDIA_URL = '/media/'
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 if not DEBUG:
     
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
