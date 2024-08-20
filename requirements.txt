@@ -13,3 +13,4 @@ soupsieve
 sqlparse
 typing_extensions
 whitenoise
+gunicorn
