@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.db.models import Avg
+from django.db.models import Avg, Cast, FloatField
 from django.views.generic.edit import FormView
 from django.views.generic import DetailView
 from .forms import AddBooksForm, AddCategoryForm, AddReviewsForm
@@ -38,7 +38,8 @@ class BookDetialsView(DetailView):
 	def get_context_data(self, **kwargs):
 		context = super().get_context_data(**kwargs)
 		book = self.get_object()
-		average_rating = book.review.aggregate(Avg('rate'))['rate__avg']
+		# average_rating = book.review.aggregate(Avg('rate'))['rate__avg']
+		average_rating = book.review.aggregate(rate__avg=Avg(Cast('rate', FloatField())))['rate__avg']
 		context['average_rating'] = average_rating if average_rating else 'No ratings yet'
 		return context
 
