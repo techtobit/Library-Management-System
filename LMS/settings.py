@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-zb^wzdghe6wq4z06@v82v97e*o$io-d&ji!e300t9n5s01zm$2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -83,8 +83,7 @@ WSGI_APPLICATION = 'LMS.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         # Replace this value with your local database's connection string.
-        default='postgresql://postgres:postgres@localhost:5432/LMS',
-        conn_max_age=600
+        default='postgresql://lms_vc8w_user:2p87rZU0u4gDTl2PBvh5KQHt6jnnaVQ1@dpg-cr2dol88fa8c73dhonbg-a.singapore-postgres.render.com/lms_vc8w'
     )
 }
 
