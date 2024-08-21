@@ -11,4 +11,5 @@ urlpatterns = [
     path('auth/', include('User.urls')),
     path('lms/', include('Books.urls')),
 ]
-urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
