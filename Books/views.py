@@ -60,7 +60,7 @@ class BookDetialsView(DetailView):
 			return redirect('profile')
 		else:
 			messages.success(request, f'You donot have enough balance')
-			return redirect('book-details', id=book.id)
+			return redirect('book_detials', id=book.id)
 
 			
 class AddReviewView(FormView):
